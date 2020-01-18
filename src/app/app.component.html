@@ -1,0 +1,24 @@
+<!-- Toolbar -->
+<div class="toolbar" role="banner">
+  <span>Welcome</span>
+</div>
+
+<!-- Editor Template Starts-->
+<div class="content">
+  <h4>Please enter your text:</h4>
+  <textarea placeholder="Type Something..." [value]="defaultText" (change)="onValueChange($event)" appCcMarkDown></textarea>
+
+  <!-- HTML Output -->
+  <div> 
+    <h4>HTML Output</h4>   
+    <textarea [value]="finalString" readonly></textarea>
+</div>
+<!-- Preview Pane-->  
+<div>
+    <h4>Preview</h4>
+      <span [innerHTML]="finalString"></span>
+  </div>
+</div>
+<!-- Editor template ends -->
+
+<router-outlet></router-outlet>
