@@ -1,4 +1,7 @@
 # MarkdownEditor
+This is a simple markdown editor app.
+Application enhances standard textarea/input into a markdown editor.
+It takes input user text and provides a preview pane which displays converted marked-up text and equivalent HTML output. 
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.3.5.
 
@@ -22,6 +25,4 @@ Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.
 
 Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
 
-## Further help
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
