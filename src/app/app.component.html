@@ -1,24 +1,31 @@
-<!-- Toolbar -->
-<div class="toolbar" role="banner">
-  <span>Welcome</span>
-</div>
+<!-- <div class="content-wrapper">
+  <span>Enter your text</span>
+  <textarea ccMarkDown [value]="defaultText" (valueChange)="onValueChange($event)">
 
-<!-- Editor Template Starts-->
-<div class="content">
-  <h4>Please enter your text:</h4>
-  <textarea placeholder="Type Something..." [value]="defaultText" (change)="onValueChange($event)" appCcMarkDown></textarea>
+  </textarea>
+  <span>HTML Output</span>
+  <textarea name="" id="" cols="30" rows="10" value="{{ markDownText }}">
 
-  <!-- HTML Output -->
-  <div> 
-    <h4>HTML Output</h4>   
-    <textarea [value]="finalString" readonly></textarea>
-</div>
-<!-- Preview Pane-->  
-<div>
-    <h4>Preview</h4>
-      <span [innerHTML]="finalString"></span>
+  </textarea>
+
+  <div [innerHTML]="markDownText">
+
   </div>
-</div>
-<!-- Editor template ends -->
 
-<router-outlet></router-outlet>
+</div> -->
+
+<div>
+  <nav>
+    <button class="btn" (click)="toolbarHandler('bold')"> B</button>
+    <button class="btn" (click)="toolbarHandler('italic')"> I </button>
+    <button class="btn" (click)="toolbarHandler('link')"> Link </button>
+  </nav>
+</div>
+<br>
+
+<textarea cols="50" rows="10" #editor [(ngModel)]="inputValue"></textarea>
+
+<br>
+<section> Preview:
+  <div class="toolbar" [ccMarkDown]=inputValue> {{inputValue}} </div>
+</section>

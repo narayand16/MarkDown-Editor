@@ -1,28 +1,47 @@
-import { Directive, OnInit, Output, ViewChild, ElementRef, HostListener} from '@angular/core';
-import { EventEmitter } from 'events';
-
+import { Directive, Output, HostListener, Input, EventEmitter, DoCheck, Renderer2, ElementRef } from '@angular/core';
+import marked from "marked";
 @Directive({
-  selector: '[appCcMarkDown]',
-  // host: {
-  //   '(valueChange)' : 'isEventListened($event)'  
-  // }
+  selector: '[ccMarkDown]'
 })
-export class CcMarkDownDirective implements OnInit {
-  modifiedValue: string;
-  constructor() { }
+export class CcMarkDownDirective implements DoCheck {
+  inputText: string;
 
-  ngOnInit() { }
+  // @Input() value: string;
+  // @Output() valueChange: EventEmitter<any> = new EventEmitter();
 
-  // onValueChange(data){
-  //   this.con.nativeElement.value = "new text";
-  //   this.modifiedValue = "vvs";
-  //   // if($event.target.value != "")
-  //   //   console.log($event.target.value);
+  // @HostListener('keyup', ['$event'])
+  // getInputValue(event) {
+  //   this.getMarkdown(event.target.value);
   // }
 
-  // @HostListener('valueChange') isEventListened($event){
-  //   console.log("insidehost", $event.target.value)
-  //   this.onValueChange($event);
+  // getMarkdown(inputText) {
+  //   if (inputText) {
+  //     this.inputText = inputText.replace(new RegExp('\//', 'g'), '*')
+  //     const markDown = this.inputText ? marked(this.inputText) : '';
+  //     this.valueChange.next({ markDown: markDown });
+  //   }
   // }
+
+  @Input()
+  ccMarkDown;
+
+  constructor(private renderer: Renderer2, private elementRef: ElementRef) {
+    this.getMarkdown();
+  }
+
+  ngDoCheck() {
+    this.getMarkdown();
+  }
+
+  private getMarkdown() {
+    if (this.ccMarkDown) {
+      const myInputccMarkDown = this.ccMarkDown.toString().replace(new RegExp('\//', 'g'), '*');
+      this.ccMarkDown = myInputccMarkDown;
+    }
+    if (this.ccMarkDown) {
+      const markdownHtml = marked(this.ccMarkDown);
+      this.renderer.setProperty(this.elementRef.nativeElement, 'innerHTML', markdownHtml);
+    }
+  }
 }
 
